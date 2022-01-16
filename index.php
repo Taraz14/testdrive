@@ -3,9 +3,7 @@
 require_once('vendor/autoload.php');
 
 $loader = new \Twig\Loader\FilesystemLoader('view');
-$twig = new \Twig\Environment($loader, [
-    'cache' => 'cache',
-]);
+$twig = new \Twig\Environment($loader);
 
 $price = file_get_contents('http://localhost/docker/price.json');
 $price_decode = json_decode($price, TRUE);
@@ -31,8 +29,8 @@ $harga_baru = [
 
 $format[] = preg_replace($pattern, '<sup>Rp </sup>$1<sup>$2</sup><sup>/bln</sup>', $harga_baru);
 
-// print_r($format[0]['bayi_new']);
-// die();
+print_r($format);
+die();
 echo $twig->render('landingPage.twig', [
     'base_url' => 'assets/',
     'favicon' => '/',
